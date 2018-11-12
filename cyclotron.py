@@ -144,19 +144,20 @@ def rk4(particle, iterations, desired_value):
 
 def plot(coord_labels, title, dimension, x, y, z = 0):
 	
-	fig = plt.figure()
-	
-	if dimension == '2d':
-		ax = fig.add_subplot(1,1,1)
-		ax.plot(x, y )
-	elif dimension == '3d':
-		ax = fig.add_subplot(111,projection = dimension)
-		ax.plot3D(x, z, y)
-		ax.set_zlabel(coord_labels[2])
-		
-	ax.set_xlabel(coord_labels[0])
-	ax.set_ylabel(coord_labels[1])
-	ax.set_title(title)
+        fig = plt.figure()
+        
+        if dimension == '2d':
+                ax = fig.add_subplot(1,1,1)
+                ax.plot(x, y)
+                ax.set_ylabel(coord_labels[1])
+        elif dimension == '3d':
+                ax = fig.add_subplot(111,projection = dimension)
+                ax.plot3D(x, z, y)
+                ax.set_zlabel(coord_labels[1])
+                ax.set_ylabel(coord_labels[2])
+                
+        ax.set_xlabel(coord_labels[0])
+        ax.set_title(title)
 	
 		
 
@@ -172,21 +173,21 @@ def position_plot(particle):
 
 	x = []
 	y = []
-	z = []
+	#z = []
 	
 	x.append(particle.pos[0])
 	y.append(particle.pos[1])
-	z.append(particle.pos[2])
+	#z.append(particle.pos[2])
 	
 	results = rk4(proton , 10000 ,'position')	
 	
 	for i in results:
 		x.append(i[0])
 		y.append(i[1])
-		z.append(i[2])
+		#z.append(i[2])
 		
-	coordlabel = ["X-axis (m)","Y-axis (m)","Z-axis (m)"]
-	plot(coordlabel, "Particle Trajectory in Cyclotron Accelerator", '3d', x,y,z)
+	coordlabel = ["X-axis (m)","Y-axis (m)"]#,"Z-axis (m)"]
+	plot(coordlabel, "Particle Trajectory in Cyclotron Accelerator", '2d', x,y)#,z)
 
 	
 
@@ -205,7 +206,7 @@ def velocity_plot(particle):
 	t = np.linspace(0, len(v) * h, len(v))
 	
 	
-	coordlabel = ["Time (s)","Velocity (m/s)","Z-axis (m)"]
+	coordlabel = ["Time (s)","Velocity (m/s)"]
 	plot(coordlabel, "Beam Velocity as a Function of Time", '2d', t,v)
 	
 
